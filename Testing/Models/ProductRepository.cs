@@ -30,6 +30,25 @@ namespace Testing.Models
              _conn.Execute("UPDATE PRODUCTS SET NAME = @name, PRICE = @price WHERE PRODUCTID = @id",
               new { name = product.Name, price = product.Price, id = product.ProductID });
         }
+
+        public IEnumerable<Category> GetCategories()
+        {
+            return _conn.Query<Category>("SELECT * FROM CATEGORIES");
+        }
+
+        public void InsertProduct(Product productToInsert)
+        {
+            _conn.Execute("INSERT INTO PRODUCTS(NAME, PRICE, CATEGORYID) VALUES(@name, @price, @categoryid);",
+                new { name = productToInsert.Name, price = productToInsert.Price, categoryid = productToInsert.CategoryID });
+        }
+
+        public Product AssignCategory()
+        {
+            var categoryList = GetCategories();
+            var product = new Product();
+            product.Categories = categoryList;
+            return product;
+        }
     }
 }
 
