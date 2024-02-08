@@ -9,6 +9,8 @@ namespace Testing.Models
 
         public Product GetProduct(int id);
 
+        public void UpdateProduct(Product product);
+
     }
 }
 

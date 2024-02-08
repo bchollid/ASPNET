@@ -24,6 +24,12 @@ namespace Testing.Models
             return _conn.QuerySingle<Product>("SELECT * FROM PRODUCTS WHERE PRODUCTID = @id",
                 new { id = id});
         }
+
+        public void UpdateProduct(Product product)
+        {
+             _conn.Execute("UPDATE PRODUCTS SET NAME = @name, PRICE = @price WHERE PRODUCTID = @id",
+              new { name = product.Name, price = product.Price, id = product.ProductID });
+        }
     }
 }
 
